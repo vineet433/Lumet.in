@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lumet</title>
+
+<!-- GOOGLE FONTS -->
+
+<link href="https://fonts.googleapis.com/css2?family=Changa:wght@500;700&family=Instrument+Serif&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+    linear-gradient(
+    180deg,
+    #071426 0%,
+    #081a31 40%,
+    #091e38 100%
+    );
+
+    color:white;
+
+    overflow-x:hidden;
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+.navbar{
+
+    width:100%;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 60px;
+
+    background:rgba(7,20,38,0.45);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,0.25);
+}
+
+/* LOGO */
+
+.logo img{
+
+    width:98px;
+    height:58px;
+
+    border-radius:15px;
+
+    object-fit:cover;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:500;
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#7db4ff;
+}
+
+/* BUTTON */
+
+.nav-btn{
+
+    padding:12px 24px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#0c3261;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.2);
+}
+
+.nav-btn:hover{
+
+    background:#1d5cab;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 30px rgba(29,92,171,0.45);
+}
+
+/* PROFILE */
+
+.profile-circle{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#1d5cab;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:white;
+
+    text-transform:uppercase;
+
+    box-shadow:
+    0 0 25px rgba(29,92,171,0.5);
+}
+
+/* HAMBURGER */
+
+.hamburger{
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    cursor:pointer;
+}
+
+.hamburger div{
+
+    width:28px;
+    height:3px;
+
+    background:white;
+
+    border-radius:10px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:180px 20px 100px;
+
+    background:
+    linear-gradient(rgba(7,20,38,0.78),rgba(7,20,38,0.82)),
+    url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop');
+
+    background-size:cover;
+
+    background-position:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* GLOW */
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:rgba(29,92,171,0.15);
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    top:-200px;
+    left:-200px;
+}
+
+/* SEARCH */
+
+.search-container{
+
+    width:60%;
+
+    max-width:750px;
+
+    position:relative;
+
+    margin-bottom:50px;
+
+    z-index:2;
+}
+
+.search-bar{
+
+    width:100%;
+
+    padding:22px 28px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:60px;
+
+    font-size:18px;
+
+    background:rgba(255,255,255,0.95);
+
+    transition:0.3s;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+.search-bar:focus{
+
+    transform:scale(1.02);
+
+    box-shadow:
+    0 0 30px rgba(125,180,255,0.35);
+}
+
+/* SEARCH POPUP */
+
+.search-popup{
+
+    position:absolute;
+
+    width:100%;
+
+    top:85px;
+
+    background:#10233a;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    display:none;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,0.35);
+}
+
+.search-item{
+
+    padding:18px 24px;
+
+    cursor:pointer;
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+
+    transition:0.3s;
+}
+
+.search-item:hover{
+    background:#17395f;
+}
+
+/* HERO TEXT */
+
+.hero h2{
+
+    font-size:95px;
+
+    font-family:'Changa',sans-serif;
+
+    color:white;
+
+    width:85%;
+
+    line-height:1.1;
+
+    text-shadow:
+    0 0 30px rgba(255,255,255,0.08);
+
+    z-index:2;
+}
+
+/* =========================
+SECTION
+========================= */
+
+.section{
+    padding:110px 70px;
+}
+
+.section-title{
+
+    font-size:52px;
+
+    margin-bottom:50px;
+
+    font-weight:700;
+}
+
+/* =========================
+NICHES
+========================= */
+
+.niche-scroll{
+
+    display:flex;
+
+    gap:28px;
+
+    overflow-x:auto;
+
+    padding-bottom:20px;
+}
+
+.niche-scroll::-webkit-scrollbar{
+    height:10px;
+}
+
+.niche-scroll::-webkit-scrollbar-thumb{
+
+    background:#1d5cab;
+
+    border-radius:20px;
+}
+
+.niche-box{
+
+    min-width:280px;
+    height:220px;
+
+    background:#10233a;
+
+    border-radius:28px;
+
+    padding:35px;
+
+    flex-shrink:0;
+
+    transition:0.45s;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(29,92,171,0.12);
+}
+
+.niche-box:hover{
+
+    transform:translateY(-10px);
+}
+
+.niche-box h3{
+
+    color:#7db4ff;
+
+    font-size:28px;
+
+    margin-bottom:15px;
+}
+
+.niche-box p{
+
+    color:#d7d7d7;
+
+    line-height:1.8;
+}
+
+/* =========================
+LARGE BOXES
+========================= */
+
+.large-box{
+
+    width:100%;
+
+    min-height:520px;
+
+    background:#10233a;
+
+    border-radius:35px;
+
+    padding:55px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:50px;
+
+    margin-bottom:60px;
+
+    transition:0.45s;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(29,92,171,0.12);
+}
+
+.large-box:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 15px 60px rgba(0,0,0,0.45),
+    0 0 40px rgba(29,92,171,0.2);
+}
+
+.large-box img{
+
+    width:42%;
+
+    border-radius:30px;
+
+    object-fit:cover;
+
+    transition:0.45s;
+}
+
+.large-box img:hover{
+    transform:scale(1.03);
+}
+
+.large-content{
+    flex:1;
+}
+
+.large-content h2{
+
+    font-size:72px;
+
+    color:#7db4ff;
+
+    font-family:'Instrument Serif',serif;
+
+    margin-bottom:25px;
+}
+
+.large-content p{
+
+    font-size:20px;
+
+    color:#d7d7d7;
+
+    line-height:1.9;
+}
+
+.reverse{
+    flex-direction:row-reverse;
+}
+
+/* =========================
+POPUPS
+========================= */
+
+.popup-overlay{
+
+    width:100%;
+    height:100vh;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    background:rgba(0,0,0,0.45);
+
+    backdrop-filter:blur(12px);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:2000;
+}
+
+.popup{
+
+    width:430px;
+
+    background:rgba(16,35,58,0.72);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    padding:40px;
+
+    border-radius:30px;
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(29,92,171,0.12);
+}
+
+.popup h2{
+
+    font-size:42px;
+
+    margin-bottom:25px;
+}
+
+.popup input,
+.popup textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    font-size:16px;
+}
+
+.popup textarea{
+
+    height:120px;
+
+    resize:none;
+}
+
+.popup button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#0c3261;
+
+    color:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+}
+
+.close{
+
+    position:absolute;
+
+    top:30px;
+    right:40px;
+
+    font-size:30px;
+
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+
+    background:#050d18;
+
+    padding:55px;
+
+    text-align:center;
+
+    margin-top:100px;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:1000px){
+
+.navbar{
+    padding:18px 20px;
+}
+
+.hamburger{
+    display:flex;
+}
+
+.nav-links{
+
+    position:absolute;
+
+    top:90px;
+    right:20px;
+
+    background:#10233a;
+
+    width:260px;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    display:none;
+}
+
+.nav-links.active{
+    display:flex;
+}
+
+.hero h2{
+
+    font-size:52px;
+
+    width:95%;
+}
+
+.search-container{
+    width:95%;
+}
+
+.large-box{
+    flex-direction:column;
+}
+
+.large-box img{
+    width:100%;
+}
+
+.large-content h2{
+    font-size:50px;
+}
+
+.large-content p{
+    font-size:17px;
+}
+
+.section{
+    padding:80px 20px;
+}
+
+.popup{
+    width:92%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+<div class="logo">
+<img src="IMG_0952.jpeg" alt="Logo">
+</div>
+
+<!-- HAMBURGER -->
+
+<div class="hamburger" onclick="toggleMenu()">
+
+<div></div>
+<div></div>
+<div></div>
+
+</div>
+
+<!-- NAV LINKS -->
+
+<div class="nav-links" id="navLinks">
+
+<a href="#">Home</a>
+<a href="#">Explore</a>
+<a href="#">Freelancers</a>
+<a href="#">Projects</a>
+<a href="#">Contact</a>
+
+<button class="nav-btn" onclick="openFreelancerPopup()">
+Become a Freelancer
+</button>
+
+<button
+class="nav-btn"
+id="loginBtn"
+onclick="openLogin()"
+>
+Log In
+</button>
+
+<button
+class="nav-btn"
+id="signupBtn"
+onclick="openSignup()"
+>
+Sign Up
+</button>
+
+<!-- PROFILE -->
+
+<div class="profile-circle" id="profileCircle">
+A
+</div>
+
+</div>
+
+</nav>
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<div class="search-container">
+
+<input
+type="text"
+class="search-bar"
+placeholder="Search services..."
+id="searchInput"
+onkeyup="searchFunction()"
+/>
+
+<div class="search-popup" id="searchPopup"></div>
+
+</div>
+
+<h2>
+Hire Smart , Work Better
+</h2>
+
+</section>
+
+<!-- =========================
+POPULAR NICHES
+========================= -->
+
+<section class="section">
+
+<h1 class="section-title">
+Popular Niches
+</h1>
+
+<div class="niche-scroll">
+
+<div class="niche-box">
+<h3>Web Development</h3>
+<p>Create modern websites and powerful platforms.</p>
+</div>
+
+<div class="niche-box">
+<h3>Graphic Design</h3>
+<p>Branding, logos and UI/UX experiences.</p>
+</div>
+
+<div class="niche-box">
+<h3>Video Editing</h3>
+<p>Professional editing for creators and brands.</p>
+</div>
+
+<div class="niche-box">
+<h3>App Development</h3>
+<p>Build Android and iOS applications.</p>
+</div>
+
+<div class="niche-box">
+<h3>Content Writing</h3>
+<p>SEO articles and creative writing.</p>
+</div>
+
+<div class="niche-box">
+<h3>Digital Marketing</h3>
+<p>Grow businesses online professionally.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+LARGE BOXES
+========================= -->
+
+<section class="section">
+
+<div class="large-box">
+
+<div class="large-content">
+
+<h2>Hire experts</h2>
+
+<p>
+Connect with skilled freelancers globally
+and build projects faster with trusted experts.
+</p>
+
+</div>
+
+<img src="IMG_0955.png" alt="Experts">
+
+</div>
+
+<div class="large-box reverse">
+
+<div class="large-content">
+
+<h2>Start a business</h2>
+
+<p>
+Turn your talent into a successful online business
+through Lumet's freelancing platform.
+</p>
+
+</div>
+
+<img src="IMG_0953.png" alt="Business">
+
+</div>
+
+<div class="large-box">
+
+<div class="large-content">
+
+<h2>And Grow</h2>
+
+<p>
+Expand your opportunities and grow bigger
+through a creative online marketplace.
+</p>
+
+</div>
+
+<img src="IMG_0954.png" alt="Grow">
+
+</div>
+
+</section>
+
+<!-- =========================
+LOGIN POPUP
+========================= -->
+
+<div class="popup-overlay" id="loginPopup">
+
+<div class="close" onclick="closeLogin()">✕</div>
+
+<div class="popup">
+
+<h2>Welcome Back</h2>
+
+<input
+type="text"
+id="loginName"
+placeholder="Enter your Name"
+>
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Enter your Email"
+>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Enter Password"
+>
+
+<button onclick="loginUser()">
+Log In
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================
+SIGNUP POPUP
+========================= -->
+
+<div class="popup-overlay" id="signupPopup">
+
+<div class="close" onclick="closeSignup()">✕</div>
+
+<div class="popup">
+
+<h2>Welcome</h2>
+
+<input
+type="text"
+id="signupName"
+placeholder="Enter your Name"
+>
+
+<input
+type="email"
+id="signupEmail"
+placeholder="Enter your Gmail"
+>
+
+<input
+type="password"
+id="signupPassword"
+placeholder="Create Password"
+>
+
+<button onclick="signupUser()">
+Sign Up
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================
+FREELANCER POPUP
+========================= -->
+
+<div class="popup-overlay" id="freelancerPopup">
+
+<div class="close" onclick="closeFreelancerPopup()">✕</div>
+
+<div class="popup">
+
+<h2>Become a Freelancer</h2>
+
+<input type="text" placeholder="Full Name">
+
+<input type="email" placeholder="Email Address">
+
+<input type="tel" placeholder="Phone Number">
+
+<input type="text" placeholder="Your Skills">
+
+<textarea placeholder="Describe Yourself"></textarea>
+
+<button>
+Submit
+</button>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>
+© 2026 Lumet — Hire Smart, Work Better
+</h2>
+
+</footer>
+
+<!-- =========================
+MAIN JS
+========================= -->
+
+<script>
+
+/* SEARCH */
+
+const searchData = [
+
+"Web Development",
+"Graphic Design",
+"Video Editing",
+"Digital Marketing",
+"Content Writing",
+"SEO Expert",
+"Logo Design",
+"App Development"
+
+];
+
+function searchFunction(){
+
+let input =
+document.getElementById("searchInput")
+.value.toLowerCase();
+
+let popup =
+document.getElementById("searchPopup");
+
+popup.innerHTML = "";
+
+if(input === ""){
+
+popup.style.display = "none";
+
+return;
+
+}
+
+let filtered =
+searchData.filter(item =>
+item.toLowerCase().includes(input)
+);
+
+filtered.forEach(item => {
+
+let div = document.createElement("div");
+
+div.classList.add("search-item");
+
+div.innerText = item;
+
+popup.appendChild(div);
+
+});
+
+popup.style.display = "block";
+
+}
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+
+document.getElementById("navLinks")
+.classList.toggle("active");
+
+}
+
+/* LOGIN POPUP */
+
+function openLogin(){
+
+document.getElementById("loginPopup")
+.style.display = "flex";
+
+}
+
+function closeLogin(){
+
+document.getElementById("loginPopup")
+.style.display = "none";
+
+}
+
+/* SIGNUP POPUP */
+
+function openSignup(){
+
+document.getElementById("signupPopup")
+.style.display = "flex";
+
+}
+
+function closeSignup(){
+
+document.getElementById("signupPopup")
+.style.display = "none";
+
+}
+
+/* FREELANCER POPUP */
+
+function openFreelancerPopup(){
+
+document.getElementById("freelancerPopup")
+.style.display = "flex";
+
+}
+
+function closeFreelancerPopup(){
+
+document.getElementById("freelancerPopup")
+.style.display = "none";
+
+}
+
+/* SIGNUP */
+
+function signupUser(){
+
+let name =
+document.getElementById("signupName")
+.value;
+
+if(name === ""){
+
+alert("Please enter your name");
+
+return;
+
+}
+
+let firstLetter =
+name.charAt(0).toUpperCase();
+
+let profile =
+document.getElementById("profileCircle");
+
+profile.style.display = "flex";
+
+profile.innerText = firstLetter;
+
+/* HIDE BUTTONS */
+
+document.getElementById("loginBtn")
+.style.display = "none";
+
+document.getElementById("signupBtn")
+.style.display = "none";
+
+closeSignup();
+
+}
+
+/* LOGIN */
+
+function loginUser(){
+
+let name =
+document.getElementById("loginName")
+.value;
+
+if(name === ""){
+
+alert("Please enter your name");
+
+return;
+
+}
+
+let firstLetter =
+name.charAt(0).toUpperCase();
+
+let profile =
+document.getElementById("profileCircle");
+
+profile.style.display = "flex";
+
+profile.innerText = firstLetter;
+
+/* HIDE BUTTONS */
+
+document.getElementById("loginBtn")
+.style.display = "none";
+
+document.getElementById("signupBtn")
+.style.display = "none";
+
+closeLogin();
+
+}
+
+/* OUTSIDE CLICK */
+
+window.onclick = function(e){
+
+let login =
+document.getElementById("loginPopup");
+
+let signup =
+document.getElementById("signupPopup");
+
+let freelancer =
+document.getElementById("freelancerPopup");
+
+if(e.target === login){
+
+login.style.display = "none";
+
+}
+
+if(e.target === signup){
+
+signup.style.display = "none";
+
+}
+
+if(e.target === freelancer){
+
+freelancer.style.display = "none";
+
+}
+
+}
+
+</script>
+
+<!-- =========================
+FIREBASE LINK
+========================= -->
+
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>
